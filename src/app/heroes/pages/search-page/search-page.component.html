@@ -1,0 +1,117 @@
+<div class="flex flex-column p-2">
+    <h3>Buscador</h3>
+
+    <mat-form-field>
+        <mat-label>Buscador de héroes</mat-label>
+        <input
+            type="text"
+            matInput
+            [formControl]="searchInput"
+            (input)="searchHero()"
+            [matAutocomplete]="auto" />
+
+        <mat-autocomplete autoActiveFirstOption
+            #auto="matAutocomplete"
+            (optionSelected)="onSelectedOption($event)">
+            <mat-option *ngFor="let hero of heroes" [value]="hero">
+                {{ hero.superhero }}
+            </mat-option>
+
+            <mat-option
+                *ngIf="heroes.length === 0 && searchInput.value && searchInput.value.length > 0"
+                value>
+                No se encontró nada con el término {{ searchInput.value }}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
+
+<mat-card *ngIf="selectedHero" class="hero-card"
+    [ngClass]="{ 'dc-comics': selectedHero.publisher === 'DC Comics', 'marvel-comics': selectedHero.publisher === 'Marvel Comics' }">
+    <mat-card-title>{{ selectedHero.superhero }}</mat-card-title>
+    <mat-card-subtitle>{{ selectedHero.alter_ego }}</mat-card-subtitle>
+
+    <div class="hero-image-container">
+        <img mat-card-image [src]="selectedHero.alt_img"
+            [alt]="selectedHero.superhero" class="hero-image">
+    </div>
+
+    <mat-card-content class="hero-content">
+        <h5>{{ selectedHero.publisher }}</h5>
+        <p><strong>Primera aparición:</strong> {{ selectedHero.first_appearance
+            }}</p>
+        <p><strong>Personajes:</strong> {{ selectedHero.characters }}</p>
+
+    </mat-card-content>
+
+</mat-card>
+
+<style>
+    /* Estilos generales */
+    .search-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+  
+    .full-width {
+      width: 100%;
+      max-width: 400px;
+    }
+  
+    .hero-card {
+      max-width: 400px;
+      margin: 20px auto;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+  
+    .hero-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4);
+    }
+  
+    .hero-image-container {
+  width: 100%;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 500px;
+  height: 800px;
+  object-fit: cover;
+}
+
+  
+    .hero-content {
+      padding: 16px;
+    }
+  
+    /* Estilos específicos por editorial */
+    .dc-comics {
+      background: linear-gradient(to bottom, #000428, #004e92);
+      color: white;
+    }
+  
+    .marvel-comics {
+      background: linear-gradient(to bottom, #8B0000, #FF0000);
+      color: white;
+    }
+  
+    .dc-comics h5, .marvel-comics h5 {
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 8px;
+      border-radius: 8px;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>

@@ -1,0 +1,118 @@
+<mat-card class="hero-form-card">
+  <mat-toolbar *ngIf="hero" color="primary" class="hero-header">
+    <span>{{ heroTitle }}</span>
+  </mat-toolbar>
+  
+  
+  <form [formGroup]="heroForm">
+    <div class="form-container">
+      <!-- Hero Image -->
+      <div class="hero-image-container">
+        <img 
+        [src]="heroForm.get('image_url')?.value || heroForm.get('alt_img')?.value || defaultImage" 
+  alt="imagen del heroe" 
+  class="hero-image">
+
+
+      </div>
+
+      <!-- Hero Fields -->
+      <mat-card class="hero-details">
+        <mat-form-field appearance="outline">
+          <mat-label>Superhero</mat-label>
+          <input matInput formControlName="superhero">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Alter Ego</mat-label>
+          <input matInput formControlName="alter_ego">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>First Appearance</mat-label>
+          <input matInput formControlName="first_appearance">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Characters</mat-label>
+          <input matInput formControlName="characters">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Publisher</mat-label>
+          <input matInput formControlName="publisher">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Alternative Image</mat-label>
+          <input matInput type="text" formControlName="alt_img">
+        </mat-form-field>
+      </mat-card>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+      <button *ngIf="heroForm.get('id')?.value" mat-raised-button color="warn" (click)="onDeleteHero()">Borrar</button>
+    </div>
+  </form>
+</mat-card>
+
+
+<style>
+    .hero-form-card {
+    max-width: 1100px;
+    margin: auto;
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .hero-header {
+    margin-bottom: 20px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: row; /* Imagen a la izquierda, formulario a la derecha */
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .hero-image-container {
+    flex: 1.5; /* Aumentado el tamaño de la imagen */
+    max-width: 500px; /* Puedes subirlo más si lo deseas */
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .hero-image-container:hover .hero-image {
+    transform: scale(1.1); /* Efecto de zoom más notorio */
+    box-shadow: 0 0 20px rgba(30, 136, 229, 0.8);
+  }
+
+  .hero-details {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+
+</style>

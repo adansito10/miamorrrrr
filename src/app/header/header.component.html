@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Superior</title>
+  <style>
+    /* Estilos para el menú */
+    nav {
+      background-color: #0a0a0a; /* Color primario similar a Angular Material */
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    nav span {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-links button.active-link {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Icono simulado */
+    .icon {
+      font-size: 1.5em;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    /* Ajuste del cuerpo */
+    body {
+      margin: 0;
+      padding-top: 60px;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div>
+      <span class="icon"></span> <!-- Emoji como sustituto del ícono "memory" -->
+      <span>Heroes</span>
+    </div>
+    <div class="nav-links">
+
+
+        
+    
+      <button routerLink="/auth/login">Iniciar Sesión</button>
+    </div>
+  </nav>
+
+  
+  <div style="padding: 20px;">
+    <h1>Bienvenido</h1>
+    <p>Este es un ejemplo de página con un menú superior.</p>
+  </div>
+</body>
+</html>

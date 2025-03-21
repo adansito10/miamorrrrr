@@ -1,0 +1,103 @@
+<mat-card 
+  class="hero-card" 
+  *ngIf="hero" 
+  [ngClass]="{'dc-comics': hero.publisher === 'DC Comics', 'marvel-comics': hero.publisher === 'Marvel Comics'}">
+  
+  <mat-card-header class="hero-header">
+    <mat-card-title>{{ hero.superhero }}</mat-card-title>
+    <mat-card-subtitle>{{ hero.alter_ego }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <div class="hero-image-container">
+    <img mat-card-image [src]="hero.alt_img" [alt]="hero.superhero" class="hero-image">
+  </div>
+
+
+  <mat-card-content class="hero-content">
+    <h5>{{ hero.publisher }}</h5>
+    <p>
+      <strong>Primera aparición:</strong> {{ hero.first_appearance }}
+      <br>
+      <strong>Personajes:</strong> {{ hero.characters }}
+    </p>
+  </mat-card-content>
+
+
+  <button mat-button mat-raised [routerLink]="['/heroes/list', hero.id]"> 
+    Regresar
+    <mat-icon>arrow_back</mat-icon>
+  </button> <!-- Falta el cierre aquí -->
+
+  
+</mat-card>
+
+<style>
+  .hero-card {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+  }
+
+  .hero-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-header {
+    padding: 12px;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-image-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 160%; /* 800 / 500 = 1.6 -> 160% mantiene la proporción */
+  overflow: hidden;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+}
+
+
+  .hero-card:hover .hero-image {
+    transform: scale(1.1);
+  }
+
+  .hero-content {
+    padding: 16px;
+    font-family: 'Google Sans', sans-serif;
+  }
+
+  /* Estilos dinámicos según el publisher */
+  .dc-comics {
+    background: linear-gradient(to bottom, #000428, #004e92);
+    color: white;
+  }
+
+  .marvel-comics {
+    background: linear-gradient(to bottom, #8B0000, #FF0000);
+    color: white;
+  }
+
+  .dc-comics h5, .marvel-comics h5 {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 8px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+  }
+</style>
